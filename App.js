@@ -1,21 +1,33 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { View } from 'react-native';
+import { createAppContainer } from "react-navigation";
+import { createStackNavigator } from "react-navigation-stack";
+import MovieList from './components/list';
+import MovieDetails from './components/details';
+import { Button } from 'react-native';
+import Auth from './components/auth';
+import Register from './components/register';
+import myRatings from './components/myratings';
+import Profile from './components/profile';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+const AppNavigator = createStackNavigator({
+  Auth: {screen: Auth},
+  Register : {screen: Register},
+  Profile: {screen: Profile},
+  MovieList: {screen: MovieList},
+  Details: {screen: MovieDetails},
+  MyRatings: {screen: myRatings},
+  }, 
+  {
+    defaultNavigationOptions: {
+    headerTitleAlign: 'center',
+    }
 });
+
+
+
+const App = createAppContainer(AppNavigator);
+
+export default App;
